@@ -4,64 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Merge Infinity Lite - Fast Browser Puzzle Game</title>
-  <meta name="description" content="Play Merge Infinity Lite directly in your browser. No downloads, instant loading, pure number-merging fun.">
+  <meta name="description" content="Play Merge Infinity Lite directly in your browser. A lightweight number-merging puzzle with instant loading and smooth gameplay.">
+  <meta property="og:title" content="Merge Infinity Lite - Browser Puzzle Game">
+  <meta property="og:description" content="Lightweight number puzzle game. No downloads required.">
+  <meta property="og:image" content="https://mergeinfinity.com/images/og-image.svg">
+  <meta property="og:url" content="https://mergeinfinity.com/game">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      min-height: 100vh;
-      color: #e8e8f0;
-      line-height: 1.7;
+    .game-board-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #252542, #1a1a2e);
+      border-radius: 16px;
+      height: 100%;
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-    header { text-align: center; padding: 20px 0; }
-    header h1 {
-      font-size: 2rem;
-      background: linear-gradient(135deg, #667eea, #f093fb);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-    nav { margin-top: 10px; }
-    nav a { color: #a0a0b8; padding: 8px 14px; border-radius: 20px; text-decoration: none; margin: 0 5px; }
-    nav a:hover { color: #fff; background: rgba(102, 126, 234, 0.2); }
-    .score-board { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; }
+    .score-board { display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; }
     .score-box {
-      background: #252542;
-      padding: 10px 25px;
+      background: #1a1a2e;
+      padding: 8px 20px;
       border-radius: 10px;
       text-align: center;
     }
-    .score-box label { color: #a0a0b8; font-size: 12px; text-transform: uppercase; }
-    .score-box .value { color: #fff; font-size: 24px; font-weight: bold; }
-    #game-container {
-      background: #252542;
-      border-radius: 15px;
-      padding: 15px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      position: relative;
-      max-width: 360px;
-      margin: 0 auto;
-    }
+    .score-box label { color: #a0a0b8; font-size: 11px; text-transform: uppercase; }
+    .score-box .value { color: #fff; font-size: 20px; font-weight: bold; }
     #game-board {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      gap: 8px;
       background: #1a1a2e;
       padding: 10px;
       border-radius: 10px;
     }
     .cell {
-      width: 75px; height: 75px;
+      width: 65px; height: 65px;
       background: #2d2d4a;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 22px;
       font-weight: bold;
       color: #fff;
       transition: all 0.12s ease;
@@ -72,27 +57,27 @@
     .cell[data-value="16"] { background: #f59563; color: #fff; }
     .cell[data-value="32"] { background: #f67c5f; color: #fff; }
     .cell[data-value="64"] { background: #f65e3b; color: #fff; }
-    .cell[data-value="128"] { background: #edcf72; color: #fff; font-size: 22px; }
-    .cell[data-value="256"] { background: #edcc61; color: #fff; font-size: 22px; }
-    .cell[data-value="512"] { background: #edc850; color: #fff; font-size: 22px; }
-    .cell[data-value="1024"] { background: #edc53f; color: #fff; font-size: 18px; }
-    .cell[data-value="2048"] { background: #edc22e; color: #fff; font-size: 18px; }
-    .cell.high { background: linear-gradient(135deg, #667eea, #764ba2); font-size: 16px; }
+    .cell[data-value="128"] { background: #edcf72; color: #fff; font-size: 18px; }
+    .cell[data-value="256"] { background: #edcc61; color: #fff; font-size: 18px; }
+    .cell[data-value="512"] { background: #edc850; color: #fff; font-size: 18px; }
+    .cell[data-value="1024"] { background: #edc53f; color: #fff; font-size: 16px; }
+    .cell[data-value="2048"] { background: #edc22e; color: #fff; font-size: 16px; }
+    .cell.high { background: linear-gradient(135deg, #667eea, #764ba2); font-size: 14px; }
     .cell.pop { animation: pop 0.15s ease; }
     @keyframes pop { 0%{transform:scale(0)} 50%{transform:scale(1.1)} 100%{transform:scale(1)} }
-    .btn {
-      margin-top: 15px;
-      padding: 12px 30px;
+    .game-btn {
+      margin-top: 12px;
+      padding: 10px 25px;
       border: none;
-      border-radius: 25px;
-      font-size: 16px;
+      border-radius: 20px;
+      font-size: 14px;
       font-weight: bold;
       cursor: pointer;
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: #fff;
     }
-    .btn:hover { transform: scale(1.05); }
-    .game-over {
+    .game-btn:hover { transform: scale(1.05); }
+    .game-over-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.85);
@@ -100,85 +85,71 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
+      border-radius: 16px;
+      z-index: 10;
     }
-    .game-over.show { display: flex; }
-    .game-over h2 { color: #f093fb; font-size: 1.8rem; margin-bottom: 10px; }
-    .game-over p { color: #a0a0b8; margin-bottom: 20px; font-size: 18px; }
-    .game-controls { text-align: center; margin: 15px 0; }
-    .instructions { color: #a0a0b8; font-size: 14px; margin-top: 10px; text-align: center; }
-    .content-section {
-      background: linear-gradient(135deg, rgba(37, 37, 66, 0.8), rgba(26, 26, 46, 0.8));
-      border-radius: 14px;
-      padding: 24px;
-      margin: 25px 0;
-      border: 1px solid rgba(102, 126, 234, 0.15);
-    }
-    h2 {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    h2::before { content: ''; width: 4px; height: 22px; background: linear-gradient(135deg, #667eea, #f093fb); border-radius: 2px; }
-    h3 { font-size: 1.1rem; margin: 18px 0 10px; color: #e8e8f0; }
-    p { margin-bottom: 14px; color: #b0b0c8; }
-    ul { margin-left: 20px; color: #b0b0c8; }
-    li { margin-bottom: 8px; }
-    li::marker { color: #667eea; }
-    footer {
-      background: rgba(26, 26, 46, 0.95);
-      padding: 25px 0;
-      margin-top: 30px;
-      text-align: center;
-      color: #a0a0b8;
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(102, 126, 234, 0.2);
-    }
-    .keyword-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
-    .keyword-links a {
-      background: linear-gradient(135deg, rgba(37, 37, 66, 0.9), rgba(26, 26, 46, 0.9));
-      padding: 8px 18px;
-      border-radius: 20px;
-      color: #a0a0b8;
-      font-size: 0.85rem;
-      border: 1px solid rgba(102, 126, 234, 0.2);
-      text-decoration: none;
-    }
-    .keyword-links a:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
-    @media (max-width: 380px) {
-      .cell { width: 60px; height: 60px; font-size: 20px; }
+    .game-over-overlay.show { display: flex; }
+    .game-over-overlay h2 { color: #f093fb; font-size: 1.5rem; margin-bottom: 10px; }
+    .game-over-overlay h2::before { display: none; }
+    .game-over-overlay p { color: #a0a0b8; margin-bottom: 15px; }
+    .game-hint { color: #a0a0b8; font-size: 12px; margin-top: 10px; }
+    @media (max-width: 600px) {
+      .cell { width: 55px; height: 55px; font-size: 18px; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Merge Infinity Lite</h1>
-    <nav>
-      <a href="#controls">How to Play</a>
-      <a href="#strategies">Strategy</a>
-      <a href="#related">Related</a>
-    </nav>
+    <div class="container">
+      <a href="/" class="logo"><img src="/images/logo.svg" alt="Merge Infinity Lite" height="40"></a>
+      <nav>
+        <a href="#about">How to Play</a>
+        <a href="#strategies">Strategy</a>
+        <a href="#related">Related</a>
+      </nav>
+    </div>
   </header>
 
-  <div class="container">
-    <div class="score-board">
-      <div class="score-box"><label>Score</label><div class="value" id="score">0</div></div>
-      <div class="score-box"><label>Best</label><div class="value" id="best">0</div></div>
-    </div>
-    
-    <div id="game-container">
-      <div id="game-board"></div>
-      <div class="game-over" id="game-over">
-        <h2>Game Over</h2>
-        <p>Final Score: <span id="final-score">0</span></p>
-        <button class="btn" onclick="game.restart()">Try Again</button>
+  <main class="container">
+    <section class="game-section">
+      <h1>Merge Infinity Lite</h1>
+      <div class="game-layout">
+        <div class="game-sidebar left">
+          <a href="/" class="game-thumb" title="Full Version">
+            <span class="thumb-icon">🎮</span>
+            <span class="thumb-name">Full Version</span>
+          </a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+        </div>
+        <div class="game-main">
+          <div class="game-container" id="gameContainer" style="position:relative;">
+            <div class="game-board-wrapper">
+              <div class="score-board">
+                <div class="score-box"><label>Score</label><div class="value" id="score">0</div></div>
+                <div class="score-box"><label>Best</label><div class="value" id="best">0</div></div>
+              </div>
+              <div id="game-board"></div>
+              <button class="game-btn" onclick="game.restart()">New Game</button>
+              <p class="game-hint">Arrow keys ↑↓←→ or swipe to play</p>
+            </div>
+            <div class="game-over-overlay" id="game-over">
+              <h2>Game Over</h2>
+              <p>Final Score: <span id="final-score">0</span></p>
+              <button class="game-btn" onclick="game.restart()">Try Again</button>
+            </div>
+          </div>
+        </div>
+        <div class="game-sidebar right">
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
+        </div>
       </div>
-    </div>
-    
-    <div class="game-controls">
-      <button class="btn" onclick="game.restart()">New Game</button>
-      <p class="instructions">Arrow keys or swipe to move tiles</p>
-    </div>
+    </section>
