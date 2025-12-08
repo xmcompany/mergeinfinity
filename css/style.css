@@ -63,8 +63,10 @@ h1 {
 }
 .game-thumb:hover { border-color: #667eea; transform: translateY(-2px); }
 .game-thumb.active { border-color: #f093fb; background: linear-gradient(135deg, #3a3a5c, #252542); }
-.game-thumb.empty { opacity: 0.5; cursor: default; }
+.game-thumb.empty { opacity: 0.5; cursor: default; min-height: 70px; }
 .game-thumb.empty:hover { border-color: transparent; transform: none; }
+.game-thumb.empty::before { content: '?'; font-size: 28px; margin-bottom: 5px; }
+.game-thumb.empty::after { content: 'Coming Soon'; font-size: 10px; color: #a0a0b8; text-align: center; line-height: 1.2; }
 .thumb-badge {
   position: absolute;
   top: 4px;
