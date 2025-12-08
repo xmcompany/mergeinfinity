@@ -16,7 +16,7 @@
 <body>
   <header>
     <div class="container">
-      <a href="/" class="logo">Merge Infinity</a>
+      <a href="/" class="logo"><img src="/images/logo.svg" alt="Merge Infinity" height="40"></a>
       <nav>
         <a href="#guide">Guide</a>
         <a href="#strategies">Strategies</a>
@@ -45,7 +45,7 @@
         <!-- Main game area -->
         <div class="game-main">
           <div class="game-container" id="gameContainer">
-            <iframe id="gameFrame" src="https://gamea.azgame.io/merge-infinity/" allowfullscreen title="Merge Infinity Game"></iframe>
+            <iframe id="gameFrame" src="/merge-infinity.embed" allowfullscreen title="Merge Infinity Game"></iframe>
           </div>
           <div class="game-info">
             <p><strong>How to Play:</strong> Use arrow keys ↑↓←→ or swipe. Merge same numbers to score!</p>
@@ -54,10 +54,7 @@
 
         <!-- Right sidebar games -->
         <div class="game-sidebar right">
-          <a href="#" class="game-thumb active" data-game="iframe" title="Merge Infinity (Online)">
-            <span class="thumb-icon">🎮</span>
-            <span class="thumb-name">Online Version</span>
-          </a>
+          <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
           <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
           <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
           <a href="#" class="game-thumb empty" title="Coming Soon"><span class="thumb-icon">?</span><span class="thumb-name">Coming Soon</span></a>
@@ -108,27 +105,11 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2024 mergeinfinity.com - Play Merge Infinity Online</p>
+      <p>&copy; 2025 mergeinfinity.com - Play Merge Infinity Online</p>
     </div>
   </footer>
 
   <script>
-  // Game switcher
-  document.querySelectorAll('.game-thumb:not(.empty)').forEach(thumb => {
-    thumb.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelectorAll('.game-thumb').forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-      const gameType = this.dataset.game;
-      const frame = document.getElementById('gameFrame');
-      if (gameType === 'local') {
-        frame.src = '/merge-infinity.embed';
-      } else if (gameType === 'iframe') {
-        frame.src = 'https://gamea.azgame.io/merge-infinity/';
-      }
-    });
-  });
-
   // Baidu Analytics
   var _hmt = _hmt || [];
   (function() {
