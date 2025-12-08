@@ -5,25 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Merge Infinity</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #1a1a2e;
-    }
-    .game-wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1a2e; }
+    .game-wrapper { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     .play-btn {
       padding: 20px 50px;
       font-size: 24px;
@@ -33,40 +17,15 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
-    .play-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-    }
-    .play-btn:active {
-      transform: scale(0.98);
-    }
-    .game-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-    }
-    .game-frame.active {
-      display: block;
-    }
-    .loading {
-      position: absolute;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      display: none;
-    }
-    .loading.active {
-      display: block;
-    }
+    .play-btn:hover { transform: scale(1.05); }
+    .game-frame { width: 100%; height: 100%; border: none; }
   </style>
 </head>
 <body>
   <div class="game-wrapper">
-    <button class="play-btn" onclick="(async()=>{const btn=this;const wrapper=btn.parentElement;const loading=document.createElement('div');loading.className='loading active';loading.textContent='Loading game...';wrapper.appendChild(loading);btn.style.display='none';const iframe=document.createElement('iframe');iframe.className='game-frame';iframe.src='https://gamea.azgame.io/merge-infinity/';iframe.allowFullscreen=true;iframe.allow='fullscreen';iframe.onload=()=>{loading.remove();iframe.classList.add('active');};wrapper.appendChild(iframe);})()">
+    <button class="play-btn" onclick="(async()=>{const btn=this;const wrapper=btn.parentElement;btn.textContent='Loading...';btn.disabled=true;const iframe=document.createElement('iframe');iframe.className='game-frame';iframe.src='https://gamea.azgame.io/merge-infinity/';iframe.allowFullscreen=true;iframe.allow='fullscreen';wrapper.innerHTML='';wrapper.appendChild(iframe);})()">
       ▶ Play Merge Infinity
     </button>
   </div>
