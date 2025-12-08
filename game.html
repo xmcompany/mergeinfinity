@@ -3,56 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Merge Infinity</title>
+  <title>Merge Infinity Lite - Fast Browser Puzzle Game</title>
+  <meta name="description" content="Play Merge Infinity Lite directly in your browser. No downloads, instant loading, pure number-merging fun.">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      color: #e8e8f0;
+      line-height: 1.7;
     }
-    .game-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .game-header h1 {
-      font-size: 2.5rem;
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 20px 0; }
+    header h1 {
+      font-size: 2rem;
       background: linear-gradient(135deg, #667eea, #f093fb);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 10px;
     }
-    .score-board {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
+    nav { margin-top: 10px; }
+    nav a { color: #a0a0b8; padding: 8px 14px; border-radius: 20px; text-decoration: none; margin: 0 5px; }
+    nav a:hover { color: #fff; background: rgba(102, 126, 234, 0.2); }
+    .score-board { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; }
     .score-box {
       background: #252542;
       padding: 10px 25px;
       border-radius: 10px;
       text-align: center;
     }
-    .score-box label {
-      color: #a0a0b8;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-    .score-box .value {
-      color: #fff;
-      font-size: 24px;
-      font-weight: bold;
-    }
+    .score-box label { color: #a0a0b8; font-size: 12px; text-transform: uppercase; }
+    .score-box .value { color: #fff; font-size: 24px; font-weight: bold; }
     #game-container {
       background: #252542;
       border-radius: 15px;
       padding: 15px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      position: relative;
+      max-width: 360px;
+      margin: 0 auto;
     }
     #game-board {
       display: grid;
@@ -63,17 +55,16 @@
       border-radius: 10px;
     }
     .cell {
-      width: 80px;
-      height: 80px;
+      width: 75px; height: 75px;
       background: #2d2d4a;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: bold;
       color: #fff;
-      transition: all 0.15s ease;
+      transition: all 0.12s ease;
     }
     .cell[data-value="2"] { background: #eee4da; color: #776e65; }
     .cell[data-value="4"] { background: #ede0c8; color: #776e65; }
@@ -81,230 +72,113 @@
     .cell[data-value="16"] { background: #f59563; color: #fff; }
     .cell[data-value="32"] { background: #f67c5f; color: #fff; }
     .cell[data-value="64"] { background: #f65e3b; color: #fff; }
-    .cell[data-value="128"] { background: #edcf72; color: #fff; font-size: 24px; }
-    .cell[data-value="256"] { background: #edcc61; color: #fff; font-size: 24px; }
-    .cell[data-value="512"] { background: #edc850; color: #fff; font-size: 24px; }
-    .cell[data-value="1024"] { background: #edc53f; color: #fff; font-size: 20px; }
-    .cell[data-value="2048"] { background: #edc22e; color: #fff; font-size: 20px; }
-    .cell.high { background: linear-gradient(135deg, #667eea, #764ba2); font-size: 18px; }
-    .cell.pop { animation: pop 0.2s ease; }
-    @keyframes pop {
-      0% { transform: scale(0); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .controls {
-      margin-top: 20px;
-      display: flex;
-      gap: 10px;
-    }
+    .cell[data-value="128"] { background: #edcf72; color: #fff; font-size: 22px; }
+    .cell[data-value="256"] { background: #edcc61; color: #fff; font-size: 22px; }
+    .cell[data-value="512"] { background: #edc850; color: #fff; font-size: 22px; }
+    .cell[data-value="1024"] { background: #edc53f; color: #fff; font-size: 18px; }
+    .cell[data-value="2048"] { background: #edc22e; color: #fff; font-size: 18px; }
+    .cell.high { background: linear-gradient(135deg, #667eea, #764ba2); font-size: 16px; }
+    .cell.pop { animation: pop 0.15s ease; }
+    @keyframes pop { 0%{transform:scale(0)} 50%{transform:scale(1.1)} 100%{transform:scale(1)} }
     .btn {
+      margin-top: 15px;
       padding: 12px 30px;
       border: none;
       border-radius: 25px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .btn:hover { transform: scale(1.05); }
-    .btn-primary {
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: #fff;
     }
-    .btn-secondary {
-      background: #252542;
-      color: #a0a0b8;
-    }
+    .btn:hover { transform: scale(1.05); }
     .game-over {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
-      display: flex;
+      background: rgba(0,0,0,0.85);
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      display: none;
     }
     .game-over.show { display: flex; }
-    .game-over h2 { color: #f093fb; font-size: 2rem; margin-bottom: 10px; }
-    .game-over p { color: #a0a0b8; margin-bottom: 20px; }
-    #game-container { position: relative; }
-    .instructions {
-      color: #a0a0b8;
-      font-size: 14px;
-      margin-top: 15px;
-      text-align: center;
+    .game-over h2 { color: #f093fb; font-size: 1.8rem; margin-bottom: 10px; }
+    .game-over p { color: #a0a0b8; margin-bottom: 20px; font-size: 18px; }
+    .game-controls { text-align: center; margin: 15px 0; }
+    .instructions { color: #a0a0b8; font-size: 14px; margin-top: 10px; text-align: center; }
+    .content-section {
+      background: linear-gradient(135deg, rgba(37, 37, 66, 0.8), rgba(26, 26, 46, 0.8));
+      border-radius: 14px;
+      padding: 24px;
+      margin: 25px 0;
+      border: 1px solid rgba(102, 126, 234, 0.15);
     }
-    @media (max-width: 400px) {
-      .cell { width: 65px; height: 65px; font-size: 22px; }
-      .cell[data-value="128"], .cell[data-value="256"], .cell[data-value="512"] { font-size: 20px; }
-      .cell[data-value="1024"], .cell[data-value="2048"] { font-size: 16px; }
-      .cell.high { font-size: 14px; }
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2::before { content: ''; width: 4px; height: 22px; background: linear-gradient(135deg, #667eea, #f093fb); border-radius: 2px; }
+    h3 { font-size: 1.1rem; margin: 18px 0 10px; color: #e8e8f0; }
+    p { margin-bottom: 14px; color: #b0b0c8; }
+    ul { margin-left: 20px; color: #b0b0c8; }
+    li { margin-bottom: 8px; }
+    li::marker { color: #667eea; }
+    footer {
+      background: rgba(26, 26, 46, 0.95);
+      padding: 25px 0;
+      margin-top: 30px;
+      text-align: center;
+      color: #a0a0b8;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(102, 126, 234, 0.2);
+    }
+    .keyword-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; }
+    .keyword-links a {
+      background: linear-gradient(135deg, rgba(37, 37, 66, 0.9), rgba(26, 26, 46, 0.9));
+      padding: 8px 18px;
+      border-radius: 20px;
+      color: #a0a0b8;
+      font-size: 0.85rem;
+      border: 1px solid rgba(102, 126, 234, 0.2);
+      text-decoration: none;
+    }
+    .keyword-links a:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+    @media (max-width: 380px) {
+      .cell { width: 60px; height: 60px; font-size: 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="game-header">
-    <h1>Merge Infinity</h1>
-    <div class="score-board">
-      <div class="score-box">
-        <label>Score</label>
-        <div class="value" id="score">0</div>
-      </div>
-      <div class="score-box">
-        <label>Best</label>
-        <div class="value" id="best">0</div>
-      </div>
-    </div>
-  </div>
-  
-  <div id="game-container">
-    <div id="game-board"></div>
-    <div class="game-over" id="game-over">
-      <h2>Game Over!</h2>
-      <p>Final Score: <span id="final-score">0</span></p>
-      <button class="btn btn-primary" onclick="game.restart()">Play Again</button>
-    </div>
-  </div>
-  
-  <div class="controls">
-    <button class="btn btn-primary" onclick="game.restart()">New Game</button>
-  </div>
-  
-  <p class="instructions">Use arrow keys or swipe to play</p>
+  <header>
+    <h1>Merge Infinity Lite</h1>
+    <nav>
+      <a href="#controls">How to Play</a>
+      <a href="#strategies">Strategy</a>
+      <a href="#related">Related</a>
+    </nav>
+  </header>
 
-  <script>
-    const game = {
-      board: [],
-      score: 0,
-      best: parseInt(localStorage.getItem('mergeInfinityBest')) || 0,
-      
-      init() {
-        this.board = Array(16).fill(0);
-        this.score = 0;
-        this.addTile();
-        this.addTile();
-        this.render();
-        document.getElementById('best').textContent = this.best;
-        document.getElementById('game-over').classList.remove('show');
-      },
-      
-      addTile() {
-        const empty = this.board.map((v, i) => v === 0 ? i : -1).filter(i => i >= 0);
-        if (empty.length === 0) return false;
-        const idx = empty[Math.floor(Math.random() * empty.length)];
-        this.board[idx] = Math.random() < 0.9 ? 2 : 4;
-        return idx;
-      },
-      
-      render() {
-        const boardEl = document.getElementById('game-board');
-        boardEl.innerHTML = '';
-        this.board.forEach((val, i) => {
-          const cell = document.createElement('div');
-          cell.className = 'cell';
-          if (val > 0) {
-            cell.textContent = val;
-            cell.dataset.value = val;
-            if (val > 2048) cell.classList.add('high');
-          }
-          boardEl.appendChild(cell);
-        });
-        document.getElementById('score').textContent = this.score;
-      },
-      
-      move(dir) {
-        let moved = false;
-        const getRow = (i) => Math.floor(i / 4);
-        const getCol = (i) => i % 4;
-        const getIdx = (r, c) => r * 4 + c;
-        
-        const processLine = (indices) => {
-          let line = indices.map(i => this.board[i]).filter(v => v > 0);
-          let merged = [];
-          for (let i = 0; i < line.length; i++) {
-            if (i < line.length - 1 && line[i] === line[i + 1]) {
-              merged.push(line[i] * 2);
-              this.score += line[i] * 2;
-              i++;
-            } else {
-              merged.push(line[i]);
-            }
-          }
-          while (merged.length < 4) merged.push(0);
-          indices.forEach((idx, i) => {
-            if (this.board[idx] !== merged[i]) moved = true;
-            this.board[idx] = merged[i];
-          });
-        };
-        
-        for (let i = 0; i < 4; i++) {
-          let indices;
-          if (dir === 'left') indices = [0,1,2,3].map(c => getIdx(i, c));
-          else if (dir === 'right') indices = [3,2,1,0].map(c => getIdx(i, c));
-          else if (dir === 'up') indices = [0,1,2,3].map(r => getIdx(r, i));
-          else if (dir === 'down') indices = [3,2,1,0].map(r => getIdx(r, i));
-          processLine(indices);
-        }
-        
-        if (moved) {
-          const newIdx = this.addTile();
-          this.render();
-          if (newIdx !== false) {
-            setTimeout(() => {
-              document.getElementById('game-board').children[newIdx].classList.add('pop');
-            }, 10);
-          }
-          if (this.score > this.best) {
-            this.best = this.score;
-            localStorage.setItem('mergeInfinityBest', this.best);
-            document.getElementById('best').textContent = this.best;
-          }
-          if (this.isGameOver()) {
-            document.getElementById('final-score').textContent = this.score;
-            document.getElementById('game-over').classList.add('show');
-          }
-        }
-      },
-      
-      isGameOver() {
-        if (this.board.includes(0)) return false;
-        for (let i = 0; i < 16; i++) {
-          const r = Math.floor(i / 4), c = i % 4;
-          if (c < 3 && this.board[i] === this.board[i + 1]) return false;
-          if (r < 3 && this.board[i] === this.board[i + 4]) return false;
-        }
-        return true;
-      },
-      
-      restart() { this.init(); }
-    };
+  <div class="container">
+    <div class="score-board">
+      <div class="score-box"><label>Score</label><div class="value" id="score">0</div></div>
+      <div class="score-box"><label>Best</label><div class="value" id="best">0</div></div>
+    </div>
     
-    game.init();
+    <div id="game-container">
+      <div id="game-board"></div>
+      <div class="game-over" id="game-over">
+        <h2>Game Over</h2>
+        <p>Final Score: <span id="final-score">0</span></p>
+        <button class="btn" onclick="game.restart()">Try Again</button>
+      </div>
+    </div>
     
-    document.addEventListener('keydown', (e) => {
-      if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
-        e.preventDefault();
-        game.move(e.key.replace('Arrow','').toLowerCase());
-      }
-    });
-    
-    let touchStartX, touchStartY;
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    });
-    document.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      const dy = e.changedTouches[0].clientY - touchStartY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
-        game.move(dx > 0 ? 'right' : 'left');
-      } else if (Math.abs(dy) > 30) {
-        game.move(dy > 0 ? 'down' : 'up');
-      }
-    });
-  </script>
-</body>
-</html>
+    <div class="game-controls">
+      <button class="btn" onclick="game.restart()">New Game</button>
+      <p class="instructions">Arrow keys or swipe to move tiles</p>
+    </div>
