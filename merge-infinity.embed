@@ -27,6 +27,7 @@
 </head>
 <body>
   <div class="game-wrapper" id="wrapper">
+    <img src="images/13/merge-infinity-home.jpg" alt="Merge Infinity" class="game-cover">
     <button class="play-btn" id="playBtn">▶ Play Merge Infinity</button>
   </div>
   <script>
