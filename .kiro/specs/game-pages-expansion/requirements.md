@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This specification covers the expansion of the mergeinfinity.com game website with four new game pages. Each game requires a dedicated HTML page with embedded gameplay, comprehensive game guides, and SEO-optimized content. The expansion follows the existing site architecture while maintaining consistent design patterns and Cloudflare Pages deployment requirements.
+This specification covers the expansion of the mergeinfinity.com game website with three new game pages: Pet Merge, Fruit Jam Merge Puzzle Game, and Merge Fruit 2. Each game requires a dedicated HTML page with embedded gameplay, comprehensive game guides, and SEO-optimized content. The expansion follows the existing site architecture while maintaining consistent design patterns and Cloudflare Pages deployment requirements.
 
 ## Glossary
 
@@ -16,53 +16,41 @@ This specification covers the expansion of the mergeinfinity.com game website wi
 
 ### Requirement 1
 
-**User Story:** As a player, I want to access Idle Pop Merge game on a dedicated page, so that I can play the game and learn strategies.
+**User Story:** As a player, I want to access Pet Merge game on a dedicated page, so that I can play the game and learn strategies.
 
 #### Acceptance Criteria
 
-1. WHEN a user navigates to /idle-pop-merge THEN the System SHALL display a game page with embedded Idle Pop Merge gameplay
-2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/1ae5b8b1590c4119bb5163d98b51be2c/?gd_sdk_referrer_url=https://gamedistribution.com/games/idle-pop-merge/
-3. WHEN the page renders THEN the System SHALL display the game image from images/13/idle-pop-merge.jpg
-4. WHEN the page loads THEN the System SHALL include meta title and description containing "Idle Pop Merge"
+1. WHEN a user navigates to /pet-merge THEN the System SHALL display a game page with embedded Pet Merge gameplay
+2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/31a8ddc1eef34b94a4347cd324970878/?gd_sdk_referrer_url=https://gamedistribution.com/games/pet-merge/
+3. WHEN the page renders THEN the System SHALL display the game image from images/13/pet-merge.jpg
+4. WHEN the page loads THEN the System SHALL include meta title and description containing "Pet Merge"
 5. WHEN the content section renders THEN the System SHALL display beginner guide, advanced strategy, equipment guide, and character analysis sections
 
 ### Requirement 2
 
-**User Story:** As a player, I want to access Cute Kitty Merge game on a dedicated page, so that I can play the game and learn strategies.
+**User Story:** As a player, I want to access Fruit Jam Merge Puzzle Game on a dedicated page, so that I can play the game and learn strategies.
 
 #### Acceptance Criteria
 
-1. WHEN a user navigates to /cute-kitty-merge THEN the System SHALL display a game page with embedded Cute Kitty Merge gameplay
-2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/701576d8cb014f90a0612b091a556c64/?gd_sdk_referrer_url=https://gamedistribution.com/games/cute-kitty-merge/
-3. WHEN the page renders THEN the System SHALL display the game image from images/13/cute-kitty-merge.jpg
-4. WHEN the page loads THEN the System SHALL include meta title and description containing "Cute Kitty Merge"
+1. WHEN a user navigates to /fruit-jam-merge-puzzle-game THEN the System SHALL display a game page with embedded Fruit Jam Merge Puzzle Game gameplay
+2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/d1dde7ae11fa4cf7a6c08126c9118f09/?gd_sdk_referrer_url=https://gamedistribution.com/games/fruit-jam-merge-puzzle-game/
+3. WHEN the page renders THEN the System SHALL display the game image from images/13/fruit-jam-merge-puzzle-game.jpg
+4. WHEN the page loads THEN the System SHALL include meta title and description containing "Fruit Jam Merge Puzzle Game"
 5. WHEN the content section renders THEN the System SHALL display beginner guide, advanced strategy, equipment guide, and character analysis sections
 
 ### Requirement 3
 
-**User Story:** As a player, I want to access Brainrot Merge 1 game on a dedicated page, so that I can play the game and learn strategies.
+**User Story:** As a player, I want to access Merge Fruit 2 game on a dedicated page, so that I can play the game and learn strategies.
 
 #### Acceptance Criteria
 
-1. WHEN a user navigates to /brainrot-merge-1 THEN the System SHALL display a game page with embedded Brainrot Merge 1 gameplay
-2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/86689ca50c4d4239b7df5e20b45b6976/?gd_sdk_referrer_url=https://gamedistribution.com/games/brainrot-merge-1/
-3. WHEN the page renders THEN the System SHALL display the game image from images/13/brainrot-merge-1.jpg
-4. WHEN the page loads THEN the System SHALL include meta title and description containing "Brainrot Merge 1"
+1. WHEN a user navigates to /merge-fruit-2 THEN the System SHALL display a game page with embedded Merge Fruit 2 gameplay
+2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/3cb2c3b36dca4446b037be38ddc12379/?gd_sdk_referrer_url=https://gamedistribution.com/games/merge-fruit-2/
+3. WHEN the page renders THEN the System SHALL display the game image from images/13/merge-fruit-2.jpg
+4. WHEN the page loads THEN the System SHALL include meta title and description containing "Merge Fruit 2"
 5. WHEN the content section renders THEN the System SHALL display beginner guide, advanced strategy, equipment guide, and character analysis sections
 
 ### Requirement 4
-
-**User Story:** As a player, I want to access Brainrot Boing Boing Merge game on a dedicated page, so that I can play the game and learn strategies.
-
-#### Acceptance Criteria
-
-1. WHEN a user navigates to /brainrot-boing-boing-merge THEN the System SHALL display a game page with embedded Brainrot Boing Boing Merge gameplay
-2. WHEN the game embed loads THEN the System SHALL use the embed URL https://html5.gamedistribution.com/31a8ddc1eef34b94a4347cd324970878/?gd_sdk_referrer_url=https://gamedistribution.com/games/brainrot-boing-boing-merge/
-3. WHEN the page renders THEN the System SHALL display the game image from images/13/brainrot-boing-boing-merge.jpg
-4. WHEN the page loads THEN the System SHALL include meta title and description containing "Brainrot Boing Boing Merge"
-5. WHEN the content section renders THEN the System SHALL display beginner guide, advanced strategy, equipment guide, and character analysis sections
-
-### Requirement 5
 
 **User Story:** As a content creator, I want game content to follow SEO best practices, so that pages rank well in search engines.
 
@@ -74,7 +62,7 @@ This specification covers the expansion of the mergeinfinity.com game website wi
 4. WHEN Open Graph tags are added THEN the System SHALL include og:title, og:description, og:image, and og:url
 5. WHEN content is authored THEN the System SHALL use natural language without AI-generated patterns or bulk keyword replacement
 
-### Requirement 6
+### Requirement 5
 
 **User Story:** As a developer, I want embed files to follow the established pattern, so that games load consistently across all pages.
 
@@ -85,30 +73,27 @@ This specification covers the expansion of the mergeinfinity.com game website wi
 3. WHEN the embed file is accessed directly THEN the System SHALL display a play button before loading the game
 4. WHEN robots crawl the site THEN the System SHALL block /*.embed paths via robots.txt
 
-### Requirement 7
+### Requirement 6
 
-**User Story:** As a site administrator, I want the homepage updated with new game links, so that visitors can discover new content.
+**User Story:** As a site administrator, I want the homepage and game pages updated with new game links, so that visitors can discover new content.
 
 #### Acceptance Criteria
 
-1. WHEN the homepage loads THEN the System SHALL display game thumbnails in left sidebar (6 slots) and right sidebar (6 slots)
-2. WHEN the left sidebar renders THEN the System SHALL display Merge Infinity, Merge Infinity Lite, Idle Pop Merge, Cute Kitty Merge, Brainrot Merge 1, and Brainrot Boing Boing Merge with corresponding images and links
-3. WHEN the right sidebar renders THEN the System SHALL display the same six games (Merge Infinity, Merge Infinity Lite, Idle Pop Merge, Cute Kitty Merge, Brainrot Merge 1, Brainrot Boing Boing Merge) with corresponding images and links
-4. WHEN the Related Games section renders THEN the System SHALL include links to all six games
-5. WHEN game thumbnails are clicked THEN the System SHALL navigate to the corresponding game page without .html suffix
+1. WHEN the homepage loads THEN the System SHALL display game thumbnails including the three new games (Pet Merge, Fruit Jam Merge Puzzle Game, Merge Fruit 2)
+2. WHEN the Related Games section renders THEN the System SHALL include links to all games including the three new ones
+3. WHEN game thumbnails are clicked THEN the System SHALL navigate to the corresponding game page without .html suffix
 
-### Requirement 12
+### Requirement 7
 
 **User Story:** As a player, I want each game page to display quick-switch thumbnails around the game area, so that I can easily navigate between different games.
 
 #### Acceptance Criteria
 
-1. WHEN a game page loads THEN the System SHALL display left sidebar with 6 game thumbnail slots
-2. WHEN a game page loads THEN the System SHALL display right sidebar with 6 game thumbnail slots
+1. WHEN a game page loads THEN the System SHALL display left sidebar with game thumbnail slots
+2. WHEN a game page loads THEN the System SHALL display right sidebar with game thumbnail slots
 3. WHEN thumbnails render THEN the System SHALL display game images from images/13/ directory for new games
 4. WHEN the current game thumbnail renders THEN the System SHALL apply active styling to indicate current page
 5. WHEN a thumbnail is clicked THEN the System SHALL navigate to that game's page
-6. WHEN empty slots exist THEN the System SHALL display placeholder styling with "Coming Soon" indicator
 
 ### Requirement 8
 
@@ -116,8 +101,8 @@ This specification covers the expansion of the mergeinfinity.com game website wi
 
 #### Acceptance Criteria
 
-1. WHEN sitemap.xml is updated THEN the System SHALL include URLs for all four new game pages without .html suffix
-2. WHEN sitemap entries are added THEN the System SHALL set lastmod to the current date
+1. WHEN sitemap.xml is updated THEN the System SHALL include URLs for all three new game pages without .html suffix
+2. WHEN sitemap entries are added THEN the System SHALL set lastmod to the current date (2025-12-21)
 3. WHEN the homepage entry exists THEN the System SHALL update its lastmod to the current date
 4. WHEN URLs are formatted THEN the System SHALL use / for homepage instead of /index.html
 
