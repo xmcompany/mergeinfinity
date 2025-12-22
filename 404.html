@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Merge Infinity</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Return to Merge Infinity and play free online merge games.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .error-container {
+      min-height: calc(100vh - 200px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .error-code {
+      font-size: 8rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #667eea, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 20px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .error-message {
+      font-size: 1.5rem;
+      color: #e8e8f0;
+      margin-bottom: 15px;
+    }
+    .error-description {
+      font-size: 1rem;
+      color: #a0a0b8;
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+    .error-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      border-color: #667eea;
+      color: #667eea;
+    }
+    .btn-secondary:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: #f093fb;
+      border-color: #f093fb;
+    }
+    @media (max-width: 600px) {
+      .error-code { font-size: 5rem; }
+      .error-message { font-size: 1.2rem; }
+      .error-actions { flex-direction: column; width: 100%; max-width: 300px; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo"><img src="/images/logo.svg" alt="Merge Infinity" height="40"></a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#related">Games</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="error-container">
+      <div class="error-code">404</div>
+      <h1 class="error-message">Page Not Found</h1>
+      <p class="error-description">
+        Oops! The page you're looking for seems to have merged into the void. 
+        Let's get you back to the game.
+      </p>
+      <div class="error-actions">
+        <a href="/" class="btn btn-primary">Back to Home</a>
+        <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+      </div>
+    </div>
+  </main>
+
+  <section id="related" class="container related-games">
+    <h2>Popular Games</h2>
+    <div class="games-grid">
+      <a href="/merge-fruit-2" class="game-card">
+        <img src="/images/13/merge-fruit-2.jpg" alt="Merge Fruit 2">
+        <span>Merge Fruit 2</span>
+      </a>
+      <a href="/fruit-jam-merge-puzzle-game" class="game-card">
+        <img src="/images/13/fruit-jam-merge-puzzle-game.jpg" alt="Fruit Jam Merge Puzzle Game">
+        <span>Fruit Jam Merge</span>
+      </a>
+      <a href="/pet-merge" class="game-card">
+        <img src="/images/13/pet-merge.jpg" alt="Pet Merge">
+        <span>Pet Merge</span>
+      </a>
+      <a href="/brainrot-boing-boing-merge" class="game-card">
+        <img src="/images/13/brainrot-boing-boing-merge.jpg" alt="Brainrot Boing Boing Merge">
+        <span>Boing Boing Merge</span>
+      </a>
+      <a href="/brainrot-merge-1" class="game-card">
+        <img src="/images/13/brainrot-merge-1.jpg" alt="Brainrot Merge 1">
+        <span>Brainrot Merge 1</span>
+      </a>
+      <a href="/cute-kitty-merge" class="game-card">
+        <img src="/images/13/cute-kitty-merge.jpg" alt="Cute Kitty Merge">
+        <span>Cute Kitty Merge</span>
+      </a>
+      <a href="/idle-pop-merge" class="game-card">
+        <img src="/images/13/idle-pop-merge.jpg" alt="Idle Pop Merge">
+        <span>Idle Pop Merge</span>
+      </a>
+      <a href="/merge-infinity-lite" class="game-card">
+        <img src="/images/13/merge-infinity-lite.jpg" alt="Merge Infinity Lite">
+        <span>Merge Infinity Lite</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 mergeinfinity.com</p>
+    </div>
+  </footer>
+</body>
+</html>
